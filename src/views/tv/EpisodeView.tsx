@@ -1,0 +1,29 @@
+// import { useState } from 'react';
+import { useParams } from "react-router-dom";
+import { ImageGrid } from "@/components";
+import { DETAIL_ENDPOINT } from "@/core/constants";
+import type { MediaResponse } from "@/core/types";
+import { useTmdb } from "@/hooks";
+
+export const EpisodeView = () => {
+  const { id } = useParams();
+  // const [season, setSeason] useState<number>(1);
+  const { data } = useTmdb<MediaResponse>(`${DETAIL_ENDPOINT}/${id}/season/1`, {}, []);
+
+  const gridData = (data?.results ?? []).map((result) => ({
+    id: result.id,
+    imagePath: result.still_path,
+    primaryText: result.name,
+  }));
+
+  if (!data) {
+    return <p className="text-center text-gray-400">Loading...</p>;
+  }
+
+  return (
+    <section className="mx-auto max-w-[1200px] space-y-5 p-5">
+      <h1 className="mb-4 font-bold text-3xl">Season 1</h1>
+      <ImageGrid results={gridData} />
+    </section>
+  );
+};
