@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ButtonGroup, ImageGrid, Link, Pagination } from "@/components";
+import { getImageUrl } from "@/core";
 import { TV_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
-import { getImageUrl } from "@/core";
 
 export const TrendingTvView = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -42,7 +42,7 @@ export const TrendingTvView = () => {
         value={interval}
       />
 
-      <ImageGrid onClick={(id) => `/tv/${id}`} images={gridData} />
+      <ImageGrid images={gridData} onClick={(id) => `/tv/${id}`} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

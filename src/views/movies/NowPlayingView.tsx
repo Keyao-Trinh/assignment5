@@ -1,9 +1,9 @@
-import { ImageGrid, Link, Pagination } from '@/components';
-import { getImageUrl } from '@/core';
-import { NOW_PLAYING_ENDPOINT } from '@/core/constants/endpoints';
-import type { MediaResponse } from '@/core/types/components';
-import { useTmdb } from '@/hooks';
-import { useState } from 'react';
+import { useState } from "react";
+import { ImageGrid, Link, Pagination } from "@/components";
+import { getImageUrl } from "@/core";
+import { NOW_PLAYING_ENDPOINT } from "@/core/constants/endpoints";
+import type { MediaResponse } from "@/core/types/components";
+import { useTmdb } from "@/hooks";
 
 export const NowPlayingView = () => {
   const [page, setPage] = useState<number>(1);
@@ -21,7 +21,7 @@ export const NowPlayingView = () => {
 
   return (
     <section className="mx-auto max-w-[1200px] space-y-5 p-5">
-      <h1 className="mb-4 text-3xl font-bold">Now Playing</h1>
+      <h1 className="mb-4 font-bold text-3xl">Now Playing</h1>
 
       <div>
         <Link to="/movies/catagory/now_playing">Now Playing</Link>
@@ -31,7 +31,7 @@ export const NowPlayingView = () => {
       </div>
 
       <ImageGrid images={gridData} onClick={(id) => `/movie/${id}/reviews`} />
-      <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
+      <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );
 };

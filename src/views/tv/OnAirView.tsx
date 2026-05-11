@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { ImageGrid, Link, Pagination } from "@/components";
-import { ON_AIR_ENDPOINT } from "@/core/constants";
-import type { MediaResponse } from "@/core/types";
+import { getImageUrl } from "@/core";
+import { ON_AIR_ENDPOINT } from "@/core/constants/endpoints";
+import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
 
 export const OnAirView = () => {
   const [page, setPage] = useState<number>(1);
-  const { data } = useTmdb<MediaResponse>(ON_AIR_ENDPOINT, { page }, [page]);
+  const { data } = useTmdb<MediaResponse>(ON_AIR_ENDPOINT, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
-    imagePath: result.poster_path,
+    imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_name,
   }));
 
@@ -29,7 +30,7 @@ export const OnAirView = () => {
         <Link to="/tv/catagory/airing_today">Airing Today</Link>
       </div>
 
-      <ImageGrid getHref={(id) => `/tv/${id}/credits`} results={gridData} />
+      <ImageGrid images={gridData} onClick={(id) => `/tv/${id}/credits`} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ImageGrid, Link, Pagination } from "@/components";
+import { getImageUrl } from "@/core";
 import { POPULAR_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
-import { getImageUrl } from "@/core";
 
 export const PopularView = () => {
   const [page, setPage] = useState<number>(1);
@@ -29,7 +29,7 @@ export const PopularView = () => {
         <Link to="/movies/catagory/upcoming">Upcoming</Link>
       </div>
 
-      <ImageGrid onClick={(id) => `/movie/${id}/credits`} images={gridData} />
+      <ImageGrid images={gridData} onClick={(id) => `/movie/${id}/credits`} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

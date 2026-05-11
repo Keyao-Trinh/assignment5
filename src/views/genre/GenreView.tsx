@@ -3,10 +3,10 @@
 
 import { useState } from "react";
 import { ButtonGroup, ImageGrid, Pagination } from "@/components";
-import { MOVIE_GENRA_ENDPOINT } from "@/core/constants/endpoints";
-import type { MediaResponse } from "@/core//types/components";
-import { useTmdb } from "@/hooks";
 import { getImageUrl } from "@/core";
+import type { MediaResponse } from "@/core//types/components";
+import { MOVIE_GENRA_ENDPOINT } from "@/core/constants/endpoints";
+import { useTmdb } from "@/hooks";
 
 export const GenreView = () => {
   const [page, setPage] = useState<number>(1);
@@ -94,7 +94,7 @@ export const GenreView = () => {
             ]}
           />
           or change vaule to to and make it a LinkGroup ??? */}
-      <ImageGrid onClick={(id) => `/movie/${id}`} images={gridData} />
+      <ImageGrid images={gridData} onClick={(id) => `/movie/${id}`} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

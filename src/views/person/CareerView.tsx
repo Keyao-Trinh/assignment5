@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { ImageGrid } from "@/components";
+import { getImageUrl } from "@/core";
 import { MOVIE_ENDPOINT } from "@/core/constants/endpoints";
 import type { CreditsResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
-import { getImageUrl } from "@/core";
 
 export const CareerView = () => {
   const { id } = useParams();
@@ -22,7 +22,7 @@ export const CareerView = () => {
     <section className="min-h-screen bg-gray-900 text-white">
       <h2 className="mb-6 font-bold text-2xl">Credits</h2>
       {!data.cast.length && <p className="text-center text-gray-400">No Movies available</p>}
-      <ImageGrid onClick={(id) => `/movie/${id}/reviews`} images={gridData} />
+      <ImageGrid images={gridData} onClick={(id) => `/movie/${id}/reviews`} />
     </section>
   );
 };
