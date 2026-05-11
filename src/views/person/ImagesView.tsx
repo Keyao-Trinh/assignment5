@@ -8,17 +8,20 @@
 
 import { useState } from "react";
 import { ImageGrid, Pagination } from "@/components";
-import { PERSON_ENDPOINT } from "@/core/constants";
-import type { MediaResponse } from "@/core/types";
+import { PERSON_ENDPOINT } from "@/core/constants/endpoints";
+import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
+import { useParams } from "react-router-dom";
+import { getImageUrl } from "@/core";
 
 export const ImagesView = () => {
+  const { id } = useParams();
   const [page, setPage] = useState<number>(1);
-  const { data } = useTmdb<MediaResponse>(`${PERSON_ENDPOINT}/${id}/images`, { page }, [page]);
+  const { data } = useTmdb<MediaResponse>(`${PERSON_ENDPOINT}/${id}/images`, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
-    imagePath: result.poster_path,
+    imageUrl: getImageUrl(result.poster_path),
   }));
 
   if (!data) {
@@ -30,12 +33,12 @@ export const ImagesView = () => {
       <h2 className="font-bold text-2xl">Images</h2>
       /*{" "}
       {data.results.length ? (
-        data.results.slice(0, 5).map((_image) => <ImageGrid getHref={(id) => `/person/${id}`} results={gridData} />)
+        data.results.slice(0, 5).map((_image) => <ImageGrid onClick={(id) => `/person/${id}`} images={gridData} />)
       ) : (
         <p className="text-center text-gray-400">No Images available.</p>
       )}{" "}
       */
-      <ImageGrid results={gridData} />
+      <ImageGrid images={gridData} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

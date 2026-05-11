@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { ImageGrid, Link, Pagination } from "@/components";
-import { UP_COMING_ENDPOINT } from "@/core/constants";
-import type { MediaResponse } from "@/core/types";
+import { UP_COMING_ENDPOINT } from "@/core/constants/endpoints";
+import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
+import { getImageUrl } from "@/core";
 
 export const UpcomingView = () => {
   const [page, setPage] = useState<number>(1);
-  const { data } = useTmdb<MediaResponse>(UP_COMING_ENDPOINT, { page }, [page]);
+  const { data } = useTmdb<MediaResponse>(UP_COMING_ENDPOINT, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
-    imagePath: result.poster_path,
+    imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_title,
   }));
 
@@ -28,7 +29,7 @@ export const UpcomingView = () => {
         <Link to="/movies/catagory/upcoming">Upcoming</Link>
       </div>
 
-      <ImageGrid getHref={(id) => `/movie/${id}/credits`} results={gridData} />
+      <ImageGrid onClick={(id) => `/movie/${id}/credits`} images={gridData} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

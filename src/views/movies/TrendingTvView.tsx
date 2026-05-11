@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ButtonGroup, ImageGrid, Link, Pagination } from "@/components";
-import { TV_ENDPOINT } from "@/core/constants";
-import type { MediaResponse } from "@/core/types";
+import { TV_ENDPOINT } from "@/core/constants/endpoints";
+import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
+import { getImageUrl } from "@/core";
 
 export const TrendingTvView = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState<number>(1);
   const interval = searchParams.get("interval") || "day";
-  const { data } = useTmdb<MediaResponse>(`${TV_ENDPOINT}/${interval}`, { page, time_window: interval }, [page, interval]);
+  const { data } = useTmdb<MediaResponse>(`${TV_ENDPOINT}/${interval}`, { page, time_window: interval });
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
-    imagePath: result.poster_path,
+    imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_title,
   }));
 
@@ -41,7 +42,7 @@ export const TrendingTvView = () => {
         value={interval}
       />
 
-      <ImageGrid getHref={(id) => `/tv/${id}`} results={gridData} />
+      <ImageGrid onClick={(id) => `/tv/${id}`} images={gridData} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

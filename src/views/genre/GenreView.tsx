@@ -3,18 +3,19 @@
 
 import { useState } from "react";
 import { ButtonGroup, ImageGrid, Pagination } from "@/components";
-import { MOVIE_GENRA_ENDPOINT } from "@/core/constants";
-import type { MediaResponse } from "@/core/types";
+import { MOVIE_GENRA_ENDPOINT } from "@/core/constants/endpoints";
+import type { MediaResponse } from "@/core//types/components";
 import { useTmdb } from "@/hooks";
+import { getImageUrl } from "@/core";
 
 export const GenreView = () => {
   const [page, setPage] = useState<number>(1);
   const [genre, setGenre] = useState<string>("28");
-  const { data } = useTmdb<MediaResponse>(`${MOVIE_GENRA_ENDPOINT}/&with_genres/${genre}`, { page }, [page]);
+  const { data } = useTmdb<MediaResponse>(`${MOVIE_GENRA_ENDPOINT}/&with_genres/${genre}`, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
-    imagePath: result.poster_path,
+    imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_title,
   }));
 
@@ -93,7 +94,7 @@ export const GenreView = () => {
             ]}
           />
           or change vaule to to and make it a LinkGroup ??? */}
-      <ImageGrid getHref={(id) => `/movie/${id}`} results={gridData} />
+      <ImageGrid onClick={(id) => `/movie/${id}`} images={gridData} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

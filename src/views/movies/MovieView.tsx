@@ -1,23 +1,23 @@
 import { FaCalendarAlt } from "react-icons/fa";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { LinkGroup } from "@/components";
-import { Modal } from "@/components/Modal";
-import { IMAGE_BASE_URL, MOVIE_ENDPOINT, ORIGINAL_IMAGE_BASE_URL } from "@/core/constants";
-import type { DetailRepsonse } from "@/core/types";
+import { Modal } from "@/components/site/Modal";
+import { IMAGE_BASE_URL, MOVIE_ENDPOINT, ORIGINAL_IMAGE_BASE_URL } from "@/core/constants/endpoints";
+import type { DetailRepsonse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
 // popular, Now Playing, Upcoming, and Top
 
 export const MovieView = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data } = useTmdb<DetailRepsonse>(`${MOVIE_ENDPOINT}/${id}`, { append_to_response: "videos" }, []);
+  const { data } = useTmdb<DetailRepsonse>(`${MOVIE_ENDPOINT}/${id}`, { append_to_response: "videos" });
 
   if (!data) {
     return <p className="text-center text-gray-400">Loading...</p>;
   }
 
   return (
-    <Modal onClose={() => navigate(-1)}>
+    <Modal onClick={() => navigate(-1)}>
       <section className="mx-auto max-w-[1200px] p-10">
         <div
           className="mt-4 h-[300px] bg-center bg-cover"

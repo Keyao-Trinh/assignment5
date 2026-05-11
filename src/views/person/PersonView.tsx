@@ -6,7 +6,7 @@
 import { FaCalendarAlt } from "react-icons/fa";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { Button, LinkGroup } from "@/components";
-import { IMAGE_BASE_URL, SEARCH_ENDPOINT } from "@/core/constants";
+import { IMAGE_BASE_URL, SEARCH_ENDPOINT } from "@/core/constants/endpoints";
 import { useTmdb } from "@/hooks";
 
 // popular, Now Playing, Upcoming, and Top
@@ -22,7 +22,7 @@ type PersonData = {
 export const PersonView = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data } = useTmdb<PersonData>(`${SEARCH_ENDPOINT}/${id}`, { append_to_response: "videos" }, []);
+  const { data } = useTmdb<PersonData>(`${SEARCH_ENDPOINT}/${id}`, { append_to_response: "videos" });
 
   if (!data) {
     return <p className="text-center text-gray-400">Loading...</p>;

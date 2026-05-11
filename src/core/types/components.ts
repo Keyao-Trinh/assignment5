@@ -22,9 +22,9 @@ export type GridData = {
 
 export type MediaResponse = {
   results: Array<{
-    name: any;
-    still_path: any;
-    season_number: any;
+    name: string | any;
+    still_path?: any;
+    season_number: number | any;
     id: number;
     original_title: string;
     poster_path: string;
@@ -34,6 +34,8 @@ export type MediaResponse = {
 
 export type CreditsResponse = {
   cast: Array<{
+    poster_path(poster_path: any): string;
+    title: any;
     id: number;
     name: string;
     profile_path: string | null;
@@ -77,7 +79,7 @@ export type SearchResponse = {
 };
 
 export type MovieRepsonse = {
-  [x: string]: any;
+  [x: string]: string | any;
   id: number;
   title?: string;
   overview?: string;

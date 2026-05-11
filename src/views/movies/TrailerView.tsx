@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
-import { MOVIE_ENDPOINT } from "@/core/constants";
-import type { MovieRepsonse } from "@/core/types";
+import { MOVIE_ENDPOINT } from "@/core/constants/endpoints";
+import type { MovieRepsonse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
 
 export const TrailerView = () => {
   const { id } = useParams();
-  const { data } = useTmdb<MovieRepsonse>(`${MOVIE_ENDPOINT}/${id}/videos`, { append_to_response: "videos" }, []);
+  const { data } = useTmdb<MovieRepsonse>(`${MOVIE_ENDPOINT}/${id}/videos`, { append_to_response: "videos" });
 
   const trailerVideo =
     data?.videos?.result.find(
