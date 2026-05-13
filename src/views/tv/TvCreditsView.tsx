@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { ImageGrid } from "@/components";
+import { getImageUrl } from "@/core";
 import { DETAIL_ENDPOINT } from "@/core/constants/endpoints";
 import type { CreditsResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
-import { getImageUrl } from "@/core";
 
 export const TvCreditsView = () => {
   const { id } = useParams();

@@ -21,7 +21,9 @@ export * from "@/views/tv/EpisodeView";
 export * from "@/views/tv/OnAirView";
 export * from "@/views/tv/PopularTvView";
 export * from "@/views/tv/SeasonsView";
-export * from "@/views/tv/TelevisonView";
+export * from "@/views/tv/TelevisionView";
 export * from "@/views/tv/TopTvView";
 export * from "@/views/tv/TvCreditsView";
 export * from "@/views/tv/TvReviewsView";
+export * from "@/views/user/FavouriteView.tsx";
+

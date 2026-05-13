@@ -24,8 +24,9 @@ export type MediaResponse = {
   results: Array<{
     original_name: string;
     name: string;
-    still_path?: any | string;
-    season_number: number | any;
+    still_path?: string;
+    seasons: any;
+    season_number: number;
     id: number;
     original_title: string;
     poster_path: string;
@@ -80,7 +81,7 @@ export type SearchResponse = {
 };
 
 export type MovieRepsonse = {
-  [x: string]: any;
+  // [x: string]: string ;
   id: number;
   title?: string;
   overview?: string;

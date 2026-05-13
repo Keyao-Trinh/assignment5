@@ -7,9 +7,10 @@ import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
 
 export const EpisodeView = () => {
-  const { id } = useParams();
+  const { id, number } = useParams();
+
   // const [season, setSeason] useState<number>(1);
-  const { data } = useTmdb<MediaResponse>(`${DETAIL_ENDPOINT}/${id}/season/1`, {});
+  const { data } = useTmdb<MediaResponse>(`${DETAIL_ENDPOINT}/${id}/season/${number}`, {});
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
@@ -23,7 +24,7 @@ export const EpisodeView = () => {
 
   return (
     <section className="mx-auto max-w-[1200px] space-y-5 p-5">
-      <h1 className="mb-4 font-bold text-3xl">Season 1</h1>
+      <h1 className="mb-4 font-bold text-3xl">Season {number}</h1>
       <ImageGrid images={gridData} />
     </section>
   );

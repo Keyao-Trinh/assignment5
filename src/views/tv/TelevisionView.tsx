@@ -9,7 +9,7 @@ import { useTmdb } from "@/hooks";
 
 //export type
 
-export const TelevisonView = () => {
+export const TelevisionView = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data } = useTmdb<DetailRepsonse>(`${DETAIL_ENDPOINT}/${id}`, { append_to_response: "videos" });
