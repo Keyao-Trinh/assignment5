@@ -18,8 +18,6 @@ export const SeasonsView = () => {
     primaryText: `${result.season_number}`,
   }));
 
-
-
   if (!data) {
     return <p className="text-center text-gray-400">Loading...</p>;
   }

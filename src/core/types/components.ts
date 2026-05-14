@@ -25,7 +25,7 @@ export type MediaResponse = {
     original_name: string;
     name: string;
     still_path?: string;
-    seasons: any;
+    seasons: number;
     season_number: number;
     id: number;
     original_title: string;

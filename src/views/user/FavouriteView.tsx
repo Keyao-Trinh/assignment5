@@ -1,19 +1,22 @@
 import { useNavigate } from "react-router-dom";
-import { FavouriteOverlay, ImageGrid } from "@/components";
+import { ImageGrid, ImageOverlay } from "@/components";
+import { favouriteAction, type ImageCell } from "@/core";
 import { useUserContext } from "@/hooks";
 
-export const FavouritesView = () => {
+export const FavoritesView = () => {
   const navigate = useNavigate();
-  const { favourite }: any = useUserContext();
+  const { favourites, toggleFavourite } = useUserContext();
 
   return (
     <section className="mx-auto max-w-7xl space-y-5 p-5">
       <h1 className="font-bold text-3xl">Favorites</h1>
-      {favourite.size === 0 ? (
+      {favourites.size === 0 ? (
         <p className="mt-10 text-gray-400">You have no favorites yet.</p>
       ) : (
-        <ImageGrid images={Array.from(favourite.values())} onClick={(image) => navigate(`/movie/${image.id}/credits`)}>
-          {(image) => <FavouriteOverlay image={image} />}
+        <ImageGrid images={Array.from(favourites.values())} onClick={(image) => navigate(`/movie/${image.id}/credits`)}>
+          {(image) => (
+            <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavorite)]} image={image} />
+          )}
         </ImageGrid>
       )}
     </section>
