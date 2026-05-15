@@ -14,7 +14,7 @@ export const EpisodeView = () => {
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
-    imageUrl: getImageUrl(result.still_path),
+    imageUrl: getImageUrl(result.poster_path),
     primaryText: result.name,
   }));
 

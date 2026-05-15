@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ImageGrid, Link, Pagination } from "@/components";
 import { getImageUrl } from "@/core";
 import { NOW_PLAYING_ENDPOINT } from "@/core/constants/endpoints";
@@ -6,6 +7,7 @@ import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
 
 export const NowPlayingView = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const { data } = useTmdb<MediaResponse>(NOW_PLAYING_ENDPOINT, { page });
 
@@ -30,7 +32,7 @@ export const NowPlayingView = () => {
         <Link to="/movies/catagory/upcoming">Upcoming</Link>
       </div>
 
-      <ImageGrid images={gridData} onClick={(id) => `/movie/${id}/reviews`} />
+      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/reviews`)} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );
