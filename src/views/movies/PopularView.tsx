@@ -4,9 +4,11 @@ import { getImageUrl } from "@/core";
 import { POPULAR_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
+import { useNavigate } from "react-router-dom";
 
 export const PopularView = () => {
   const [page, setPage] = useState<number>(1);
+    const navigate = useNavigate();
   const { data } = useTmdb<MediaResponse>(POPULAR_ENDPOINT, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
@@ -29,7 +31,7 @@ export const PopularView = () => {
         <Link to="/movies/catagory/upcoming">Upcoming</Link>
       </div>
 
-      <ImageGrid images={gridData} onClick={(id) => `/movie/${id}/credits`} />
+      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

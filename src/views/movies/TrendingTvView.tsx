@@ -5,10 +5,12 @@ import { getImageUrl } from "@/core";
 import { TV_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
+import { useNavigate } from "react-router-dom";
 
 export const TrendingTvView = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState<number>(1);
+    const navigate = useNavigate();
   const interval = searchParams.get("interval") || "day";
   const { data } = useTmdb<MediaResponse>(`${TV_ENDPOINT}/${interval}`, { page, time_window: interval });
 
@@ -42,7 +44,7 @@ export const TrendingTvView = () => {
         value={interval}
       />
 
-      <ImageGrid images={gridData} onClick={(id) => `/tv/${id}`} />
+      <ImageGrid images={gridData} onClick={(id) => navigate(`/tv/${id}`)} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

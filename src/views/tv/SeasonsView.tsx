@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { ImageGrid } from "@/components";
 import { getImageUrl } from "@/core";
 import { DETAIL_ENDPOINT } from "@/core/constants/endpoints";
@@ -8,6 +8,7 @@ import { useTmdb } from "@/hooks";
 
 export const SeasonsView = () => {
   const { id } = useParams();
+    const navigate = useNavigate();
   // const [season, setSeason] = useState(1);
   // let seasons = (1);
   const { data } = useTmdb<MediaResponse>(`${DETAIL_ENDPOINT}/${id}`, { append_to_response: "videos" });
@@ -25,7 +26,7 @@ export const SeasonsView = () => {
   return (
     <section className="mx-auto max-w-[1200px] space-y-5 p-5">
       <h1 className="mb-4 font-bold text-3xl">Seasons</h1>
-      <ImageGrid images={gridData} onClick={(id) => `/tv/${id}/season/${id.id}`} />
+      <ImageGrid images={gridData} onClick={(id) => navigate(`/tv/${id}/season/${id.id}`)} />
     </section>
   );
 };

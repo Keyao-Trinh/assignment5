@@ -4,9 +4,12 @@ import { getImageUrl } from "@/core";
 import { ON_AIR_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
+import { useNavigate } from "react-router-dom";
+
 
 export const OnAirView = () => {
   const [page, setPage] = useState<number>(1);
+    const navigate = useNavigate();
   const { data } = useTmdb<MediaResponse>(ON_AIR_ENDPOINT, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
@@ -30,7 +33,7 @@ export const OnAirView = () => {
         <Link to="/tv/catagory/airing_today">Airing Today</Link>
       </div>
 
-      <ImageGrid images={gridData} onClick={(id) => `/tv/${id}/credits`} />
+      <ImageGrid images={gridData} onClick={(id) => navigate(`/tv/${id}/credits`)} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { ButtonGroup, ImageGrid, Link, Pagination } from "@/components";
 import { getImageUrl } from "@/core";
 import { TRENDING_ENDPOINT } from "@/core/constants/endpoints";
@@ -9,6 +9,7 @@ import { useTmdb } from "@/hooks";
 export const TrendingView = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState<number>(1);
+    const navigate = useNavigate();
   const interval = searchParams.get("interval") || "day";
   const { data } = useTmdb<MediaResponse>(`${TRENDING_ENDPOINT}/${interval}`, { page, time_window: interval });
 
@@ -39,7 +40,7 @@ export const TrendingView = () => {
         ]}
         value={interval}
       />
-      <ImageGrid images={gridData} onClick={(id) => `/movie/${id}`} />
+      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}`)} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

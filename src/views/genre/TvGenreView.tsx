@@ -7,11 +7,15 @@ import { getImageUrl } from "@/core";
 import { TV_GENRA_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
+import { useNavigate } from "react-router-dom";
+
 // import { useSearchParams } from 'react-router-dom';
 
 export const TvGenreView = () => {
   // const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState<number>(1);
+    const navigate = useNavigate();
+
   // const [genre, setGenre] = useState||('28');
   // const genre = searchParams.get('genre') || '28';
   const genre: number = 28;
@@ -108,7 +112,7 @@ export const TvGenreView = () => {
           /> */}
 
       {/* or change vaule to to and make it a LinkGroup ??? */}
-      <ImageGrid images={gridData} onClick={(id) => `/tv/${id}`} />
+      <ImageGrid images={gridData} onClick={(id) => navigate(`/tv/${id}`)} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );
