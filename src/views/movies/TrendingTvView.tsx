@@ -1,16 +1,15 @@
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+// import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ButtonGroup, ImageGrid, Link, Pagination } from "@/components";
 import { getImageUrl } from "@/core";
 import { TV_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
-import { useNavigate } from "react-router-dom";
 
 export const TrendingTvView = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState<number>(1);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const interval = searchParams.get("interval") || "day";
   const { data } = useTmdb<MediaResponse>(`${TV_ENDPOINT}/${interval}`, { page, time_window: interval });
 

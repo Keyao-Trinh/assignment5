@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { ImageGrid, Link, Pagination } from "@/components";
-import { getImageUrl } from "@/core";
-import { POPULAR_ENDPOINT } from "@/core/constants/endpoints";
-import type { MediaResponse } from "@/core/types/components";
-import { useTmdb } from "@/hooks";
 import { useNavigate } from "react-router-dom";
+import { ImageGrid, ImageOverlay, Link, Pagination } from "@/components";
+import { favouriteAction, getImageUrl } from "@/core";
+import { POPULAR_ENDPOINT } from "@/core/constants/endpoints";
+import type { ImageCell, MediaResponse } from "@/core/types/components";
+import { useTmdb, useUserContext } from "@/hooks";
 
 export const PopularView = () => {
   const [page, setPage] = useState<number>(1);
-    const navigate = useNavigate();
+  const { favourites, toggleFavourite } = useUserContext();
+  const navigate = useNavigate();
   const { data } = useTmdb<MediaResponse>(POPULAR_ENDPOINT, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
@@ -31,7 +32,11 @@ export const PopularView = () => {
         <Link to="/movies/catagory/upcoming">Upcoming</Link>
       </div>
 
-      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
+      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)}>
+        {(image) => (
+          <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
+        )}
+      </ImageGrid>
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

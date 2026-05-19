@@ -1,14 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ImageGrid, Link, Pagination } from "@/components";
 import { getImageUrl } from "@/core";
 import { UP_COMING_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
-import { useNavigate } from "react-router-dom";
 
 export const UpcomingView = () => {
   const [page, setPage] = useState<number>(1);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { data } = useTmdb<MediaResponse>(UP_COMING_ENDPOINT, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({

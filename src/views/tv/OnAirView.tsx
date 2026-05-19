@@ -1,15 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ImageGrid, Link, Pagination } from "@/components";
 import { getImageUrl } from "@/core";
 import { ON_AIR_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
-import { useNavigate } from "react-router-dom";
-
 
 export const OnAirView = () => {
   const [page, setPage] = useState<number>(1);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { data } = useTmdb<MediaResponse>(ON_AIR_ENDPOINT, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({

@@ -4,7 +4,8 @@ import { ICON_SIZE, type ImageAction, type ImageCell } from "@/core";
 
 export const favouriteAction = (
   isFavourite: (image: ImageCell) => boolean,
-  onToggleFavourite: (image: ImageCell) => void): ImageAction => ({
+  onToggleFavourite: (image: ImageCell) => void,
+): ImageAction => ({
   active: isFavourite,
   icon: (active) =>
     active ? <FaHeart className="text-blue-500" size={ICON_SIZE} /> : <FaHeartBroken className="text-white" size={ICON_SIZE} />,

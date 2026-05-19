@@ -1,7 +1,5 @@
-import { Navigate } from "react-router-dom";
-import { Link, SearchBar } from "@/components";
-// import { SearchView } from '@/views/SearchView';
-
+import { Link } from "@/components";
+// import { SearchView } from '@/views/SearchView'; search bar
 export const Header = () => {
   return (
     <header>
@@ -13,12 +11,12 @@ export const Header = () => {
         <Link to="/genre/movies/adventure">Genre</Link>
         {/* <Link to="/search">Search</Link> */}
       </nav>
-      <SearchBar
-        onChange={(value: string): void => {
+      {/* <SearchBar
+        onChange={(_value: string): void => {
           // Navigate to =
         }}
         value={` `}
-      />
+      /> */}
     </header>
   );
 };

@@ -1,20 +1,24 @@
 import { useState } from "react";
-import { ImageGrid, Link, Pagination } from "@/components";
-import { getImageUrl } from "@/core";
-import { TOP_RATED_ENDPOINT } from "@/core/constants/endpoints";
-import type { MediaResponse } from "@/core/types/components";
-import { useTmdb } from "@/hooks";
 import { useNavigate } from "react-router-dom";
+import { ImageGrid, ImageOverlay, Link, Pagination } from "@/components";
+import { favouriteAction, getImageUrl, YEAR } from "@/core";
+import { TOP_RATED_ENDPOINT } from "@/core/constants/endpoints";
+import type { ImageCell, MediaResponse } from "@/core/types/components";
+import { useTmdb, useUserContext } from "@/hooks";
 
 export const TopRatedView = () => {
   const [page, setPage] = useState<number>(1);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { favourites, toggleFavourite } = useUserContext();
   const { data } = useTmdb<MediaResponse>(TOP_RATED_ENDPOINT, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
     imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_title,
+    secondaryText: `${
+      (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99
+    } $ `,
   }));
 
   if (!data) {
@@ -31,7 +35,11 @@ export const TopRatedView = () => {
         <Link to="/movies/catagory/upcoming">Upcoming</Link>
       </div>
 
-      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
+      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)}>
+        {(image) => (
+          <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
+        )}
+      </ImageGrid>
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

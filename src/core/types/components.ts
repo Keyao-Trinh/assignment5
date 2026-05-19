@@ -32,6 +32,7 @@ export type GridData = {
 
 export type MediaResponse = {
   results: Array<{
+    release_date: string;
     original_name: string;
     name: string;
     still_path?: string;

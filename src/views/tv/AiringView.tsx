@@ -1,14 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ImageGrid, Link, Pagination } from "@/components";
 import { getImageUrl } from "@/core";
 import { AIR_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
-import { useNavigate } from "react-router-dom";
-
 
 export const AiringView = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const { data } = useTmdb<MediaResponse>(AIR_ENDPOINT, { page });
 

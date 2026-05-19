@@ -2,17 +2,17 @@
 // get ids?
 
 import { useState } from "react";
-import { ButtonGroup, ImageGrid, Pagination } from "@/components";
+import { useNavigate } from "react-router-dom";
+import { ImageGrid, Pagination } from "@/components";
 import { getImageUrl } from "@/core";
 import type { MediaResponse } from "@/core//types/components";
 import { MOVIE_GENRA_ENDPOINT } from "@/core/constants/endpoints";
 import { useTmdb } from "@/hooks";
-import { useNavigate } from "react-router-dom";
 
 export const GenreView = () => {
   const [page, setPage] = useState<number>(1);
-   const navigate = useNavigate();
- const [genre, setGenre] = useState<string>("28");
+  const navigate = useNavigate();
+  const [genre, _setGenre] = useState<string>("28");
   const { data } = useTmdb<MediaResponse>(`${MOVIE_GENRA_ENDPOINT}/&with_genres/${genre}`, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
