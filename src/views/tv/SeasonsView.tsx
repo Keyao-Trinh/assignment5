@@ -17,6 +17,9 @@ export const SeasonsView = () => {
     id: result.season_number,
     imageUrl: getImageUrl(result.poster_path),
     primaryText: `${result.season_number}`,
+        // secondaryText: `${
+        //   (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99
+        // } $ `,
   }));
 
   if (!data) {

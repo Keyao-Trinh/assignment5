@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ButtonGroup, ImageGrid, Link, Pagination } from "@/components";
-import { getImageUrl } from "@/core";
+import { getImageUrl, YEAR } from "@/core";
 import { TRENDING_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
@@ -17,6 +17,9 @@ export const TrendingView = () => {
     id: result.id,
     imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_title,
+        secondaryText: `${
+          (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) : 4.99
+        } $ `,
   }));
 
   if (!data) {

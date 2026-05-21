@@ -5,6 +5,7 @@ import { getImageUrl } from "@/core";
 import { TV_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
+import { useState } from "react";
 
 export const TrendingTvView = () => {
   const [searchParams, setSearchParams] = useSearchParams();

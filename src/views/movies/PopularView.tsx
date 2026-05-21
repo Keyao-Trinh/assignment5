@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ImageGrid, ImageOverlay, Link, Pagination } from "@/components";
-import { favouriteAction, getImageUrl } from "@/core";
+import { favouriteAction, getImageUrl, YEAR } from "@/core";
 import { POPULAR_ENDPOINT } from "@/core/constants/endpoints";
 import type { ImageCell, MediaResponse } from "@/core/types/components";
 import { useTmdb, useUserContext } from "@/hooks";
@@ -16,6 +16,9 @@ export const PopularView = () => {
     id: result.id,
     imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_title,
+        secondaryText: `${
+          (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99
+        } $ `,
   }));
 
   if (!data) {
