@@ -25,4 +25,6 @@ export * from "@/views/tv/TelevisionView";
 export * from "@/views/tv/TopTvView";
 export * from "@/views/tv/TvCreditsView";
 export * from "@/views/tv/TvReviewsView";
-export * from "@/views/user/FavouriteView.tsx";
+export * from "@/views/user/CartView";
+export * from "@/views/user/FavouriteView";
+export * from "@/views/user/SettingView";

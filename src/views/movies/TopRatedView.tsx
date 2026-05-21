@@ -39,9 +39,9 @@ export const TopRatedView = () => {
       <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)}>
         {(image) => (
           <>
-          <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
-              <ImageOverlay actions={[cartAction((image: ImageCell) => cart.has(image.id), toggleCart)]} image={image} />
-       </>
+            <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
+            <ImageOverlay actions={[cartAction((image: ImageCell) => cart.has(image.id), toggleCart)]} image={image} />
+          </>
         )}
       </ImageGrid>
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />

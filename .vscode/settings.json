@@ -16,8 +16,5 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "cSpell.words": [
-    "favourite",
-    "favourites"
-  ]
+  "cSpell.words": ["favourite", "favourites"]
 }

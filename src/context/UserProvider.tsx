@@ -8,3 +8,4 @@ type UserProviderProps = {
 export const UserProvider = ({ children }: UserProviderProps) => {
   return <UserContext.Provider value={undefined}>{children}</UserContext.Provider>;
 };
+//user context
