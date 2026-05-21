@@ -32,6 +32,7 @@ export type GridData = {
 
 export type MediaResponse = {
   results: Array<{
+    last_air_date: string;
     release_date: string;
     original_name: string;
     name: string;
@@ -92,6 +93,7 @@ export type SearchResponse = {
 };
 
 export type MovieRepsonse = {
+  cast: string;
   // [x: string]: string ;
   id: number;
   title?: string;

@@ -1,11 +1,12 @@
 // import { useState } from "react";
+
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ButtonGroup, ImageGrid, Link, Pagination } from "@/components";
 import { getImageUrl } from "@/core";
 import { TV_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
-import { useState } from "react";
 
 export const TrendingTvView = () => {
   const [searchParams, setSearchParams] = useSearchParams();

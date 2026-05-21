@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ImageGrid, ImageOverlay, Link, Pagination } from "@/components";
-import { favouriteAction, getImageUrl, YEAR } from "@/core";
+import { cartAction, favouriteAction, getImageUrl, YEAR } from "@/core";
 import { TOP_RATED_ENDPOINT } from "@/core/constants/endpoints";
 import type { ImageCell, MediaResponse } from "@/core/types/components";
 import { useTmdb, useUserContext } from "@/hooks";
@@ -10,6 +10,7 @@ export const TopRatedView = () => {
   const [page, setPage] = useState<number>(1);
   const navigate = useNavigate();
   const { favourites, toggleFavourite } = useUserContext();
+  const { cart, toggleCart } = useUserContext();
   const { data } = useTmdb<MediaResponse>(TOP_RATED_ENDPOINT, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
@@ -37,7 +38,10 @@ export const TopRatedView = () => {
 
       <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)}>
         {(image) => (
+          <>
           <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
+              <ImageOverlay actions={[cartAction((image: ImageCell) => cart.has(image.id), toggleCart)]} image={image} />
+       </>
         )}
       </ImageGrid>
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />

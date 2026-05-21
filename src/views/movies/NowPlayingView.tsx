@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ImageGrid, ImageOverlay, Link, Pagination } from "@/components";
-import { favouriteAction, getImageUrl, YEAR } from "@/core";
+import { cartAction, favouriteAction, getImageUrl, YEAR } from "@/core";
 import { NOW_PLAYING_ENDPOINT } from "@/core/constants/endpoints";
 import type { ImageCell, MediaResponse } from "@/core/types/components";
 import { useTmdb, useUserContext } from "@/hooks";
 
 export const NowPlayingView = () => {
   const { favourites, toggleFavourite } = useUserContext();
+  const { cart, toggleCart } = useUserContext();
+
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const { data } = useTmdb<MediaResponse>(NOW_PLAYING_ENDPOINT, { page });
@@ -16,9 +18,9 @@ export const NowPlayingView = () => {
     id: result.id,
     imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_title,
-     secondaryText: `${
-          (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99
-        } $ `,
+    secondaryText: `${
+      (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99
+    } $ `,
   }));
 
   if (!data) {
@@ -38,7 +40,10 @@ export const NowPlayingView = () => {
 
       <ImageGrid images={gridData} onClick={(image) => navigate(`/movie/${image.id}/reviews`)}>
         {(image) => (
-          <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
+         <> 
+         <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
+         <ImageOverlay actions={[cartAction((image: ImageCell) => cart.has(image.id), toggleCart)]} image={image} />
+         </>
         )}
       </ImageGrid>
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />

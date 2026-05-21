@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ButtonGroup, ImageGrid, Link, Pagination } from "@/components";
-import { getImageUrl, YEAR } from "@/core";
+import { ButtonGroup, ImageGrid, ImageOverlay, Link, Pagination } from "@/components";
+import { cartAction, favouriteAction, getImageUrl, YEAR } from "@/core";
 import { TRENDING_ENDPOINT } from "@/core/constants/endpoints";
-import type { MediaResponse } from "@/core/types/components";
-import { useTmdb } from "@/hooks";
+import type { ImageCell, MediaResponse } from "@/core/types/components";
+import { useTmdb, useUserContext } from "@/hooks";
 
 export const TrendingView = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState<number>(1);
+  const { favourites, toggleFavourite } = useUserContext();
+  const { cart, toggleCart } = useUserContext();
   const navigate = useNavigate();
   const interval = searchParams.get("interval") || "day";
   const { data } = useTmdb<MediaResponse>(`${TRENDING_ENDPOINT}/${interval}`, { page, time_window: interval });
@@ -17,9 +19,9 @@ export const TrendingView = () => {
     id: result.id,
     imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_title,
-        secondaryText: `${
-          (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) : 4.99
-        } $ `,
+    secondaryText: `${
+      (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99
+    } $ `,
   }));
 
   if (!data) {
@@ -43,8 +45,15 @@ export const TrendingView = () => {
         ]}
         value={interval}
       />
-      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}`)} />
-      <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
+ <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)}>
+        {(image) => (
+          <>
+          <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
+              <ImageOverlay actions={[cartAction((image: ImageCell) => cart.has(image.id), toggleCart)]} image={image} />
+       </>
+        )}
+      </ImageGrid>
+   <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );
 };

@@ -1,7 +1,7 @@
 // import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ImageGrid } from "@/components";
-import { getImageUrl } from "@/core";
+import { getImageUrl, YEAR } from "@/core";
 import { DETAIL_ENDPOINT } from "@/core/constants/endpoints";
 import type { MediaResponse } from "@/core/types/components";
 import { useTmdb } from "@/hooks";
@@ -16,10 +16,10 @@ export const SeasonsView = () => {
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.season_number,
     imageUrl: getImageUrl(result.poster_path),
-    primaryText: `${result.season_number}`,
-        // secondaryText: `${
-        //   (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99
-        // } $ `,
+    primaryText: `season ${result.season_number}`,
+    secondaryText: `${
+      (19.99 - (YEAR - Number(result.last_air_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.last_air_date.slice(0, 4))) : 4.99
+    } $ `,
   }));
 
   if (!data) {
