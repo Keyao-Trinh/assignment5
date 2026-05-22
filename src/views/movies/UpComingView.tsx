@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ImageGrid, Link, Pagination } from "@/components";
-import { getImageUrl } from "@/core";
+import { ImageGrid, ImageOverlay, Link, Pagination } from "@/components";
+import { cartAction, favouriteAction, getImageUrl, YEAR } from "@/core";
 import { UP_COMING_ENDPOINT } from "@/core/constants/endpoints";
-import type { MediaResponse } from "@/core/types/components";
-import { useTmdb } from "@/hooks";
+import type { ImageCell, MediaResponse } from "@/core/types/components";
+import { useTmdb, useUserContext } from "@/hooks";
 
 export const UpcomingView = () => {
   const [page, setPage] = useState<number>(1);
+  const { favourites, toggleFavourite } = useUserContext();
+  const { cart, toggleCart } = useUserContext();
+
   const navigate = useNavigate();
   const { data } = useTmdb<MediaResponse>(UP_COMING_ENDPOINT, { page });
 
@@ -15,6 +18,7 @@ export const UpcomingView = () => {
     id: result.id,
     imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_title,
+    secondaryText: `${(19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99} $ `,
   }));
 
   if (!data) {
@@ -31,7 +35,14 @@ export const UpcomingView = () => {
         <Link to="/movies/catagory/upcoming">Upcoming</Link>
       </div>
 
-      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
+      <ImageGrid images={gridData} onClick={(image) => navigate(`/movie/${image.id}/reviews`)}>
+        {(image) => (
+          <>
+            <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
+            <ImageOverlay actions={[cartAction((image: ImageCell) => cart.has(image.id), toggleCart)]} image={image} />
+          </>
+        )}
+      </ImageGrid>
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

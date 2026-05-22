@@ -36,7 +36,7 @@ export const TopRatedView = () => {
         <Link to="/movies/catagory/upcoming">Upcoming</Link>
       </div>
 
-      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)}>
+      <ImageGrid images={gridData} onClick={(image) => navigate(`/movie/${image.id}/reviews`)}>
         {(image) => (
           <>
             <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />

@@ -37,7 +37,7 @@ export const TelevisionView = () => {
             <h1 className="font-bold text-4xl">{data.title}</h1>
             <p className="flex items-center gap-2 text-gray-400">
               <FaCalendarAlt />
-              {data.release_date}
+              {data.last_air_date}
             </p>
             <p className="text-gray-300 leading-relaxed">{data.overview}</p>
 

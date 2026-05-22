@@ -59,16 +59,14 @@ export const App = () => {
         <Route element={<OnAirView />} path="on_the_air" />
         <Route element={<PopularTvView />} path="popular" />
         <Route element={<TopTvView />} path="top_rated" />
-        <Route />
       </Route>
 
       <Route element={<TelevisionView />} path="/tv/:id">
         <Route element={<SeasonsView />} path="seasons">
           <Route element={<EpisodeView />} path=":number" />
-          <Route />
-          <Route element={<TvCreditsView />} path="credits" />
-          <Route element={<TvReviewsView />} path="reviews" />
         </Route>
+        <Route element={<TvCreditsView />} path="credits" />
+        <Route element={<TvReviewsView />} path="reviews" />
       </Route>
 
       <Route element={<MainLayout />} path="/genre">

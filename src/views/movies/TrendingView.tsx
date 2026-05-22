@@ -45,7 +45,7 @@ export const TrendingView = () => {
         ]}
         value={interval}
       />
-      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)}>
+      <ImageGrid images={gridData} onClick={(image) => navigate(`/movie/${image.id}/credits`)}>
         {(image) => (
           <>
             <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />

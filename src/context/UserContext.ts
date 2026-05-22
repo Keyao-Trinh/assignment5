@@ -9,4 +9,5 @@ export type UserContextType = {
   setUserName: (userName: string) => void;
   toggleFavourite: (image: ImageCell) => void;
 };
+
 export const UserContext = createContext<UserContextType | undefined>(undefined);

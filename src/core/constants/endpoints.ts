@@ -21,3 +21,7 @@ export const DETAIL_ENDPOINT = "https://api.themoviedb.org/3/tv";
 export const TV_GENRA_ENDPOINT = "https://api.themoviedb.org/3/discover/tv";
 export const MOVIE_GENRA_ENDPOINT = "https://api.themoviedb.org/3/discover/movie";
 export const PERSON_ENDPOINT = "https://api.themoviedb.org/3/person/{person_id}/movie_credits";
+
+export const USERNAME_KEY = "userName";
+export const FAVOURITES_KEY = "favourites";
+export const CART_KEY = "cart";

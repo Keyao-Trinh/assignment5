@@ -32,7 +32,7 @@ export const MovieView = () => {
             src={`${IMAGE_BASE_URL}${data.poster_path}`}
           />
           <div className="space-y-4">
-            <h1 className="font-bold text-4xl">{data.title}</h1>
+            <h1 className="font-bold text-4xl text-gray-300">{data.title}</h1>
             <p className="flex items-center gap-2 text-gray-400">
               <FaCalendarAlt />
               {data.release_date}

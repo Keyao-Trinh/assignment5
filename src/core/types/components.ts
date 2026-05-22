@@ -64,6 +64,7 @@ export type DetailRepsonse = {
   poster_path: string;
   backdrop_path: string;
   release_date: string;
+  last_air_date: number;
   videos?: {
     results: Array<{
       key: string;
