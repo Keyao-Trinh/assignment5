@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ImageGrid, ImageOverlay } from "@/components";
+import { ImageList, ImageOverlay } from "@/components";
 import { cartAction, type ImageCell } from "@/core";
 import { useUserContext } from "@/hooks";
 
@@ -13,9 +13,9 @@ export const CartView = () => {
       {cart.size === 0 ? (
         <p className="mt-10 text-gray-400">You have no carted things yet.</p>
       ) : (
-        <ImageGrid images={Array.from(cart.values())} onClick={(image) => navigate(`/movie/${image.id}/credits`)}>
+        <ImageList images={Array.from(cart.values())} onClick={(image) => navigate(`/movie/${image.id}/credits`)}>
           {(image) => <ImageOverlay actions={[cartAction((image: ImageCell) => cart.has(image.id), toggleCart)]} image={image} />}
-        </ImageGrid>
+        </ImageList>
       )}
     </section>
   );
