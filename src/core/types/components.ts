@@ -4,6 +4,13 @@ export type SearchType = "movie" | "tv" | "person";
 
 export type Media = "movie" | "tv";
 
+export type ImageGridProps = {
+  images: ImageCell[];
+  onClick?: (image: ImageCell) => void;
+  children?: (image: ImageCell) => ReactNode;
+  cost?: string;
+};
+
 export type ImageCell = {
   id: number;
   imageUrl: string;
@@ -13,6 +20,7 @@ export type ImageCell = {
   seasonId?: number;
   season?: number;
   media?: Media;
+  cost?: number;
 };
 
 export type ImageAction = {
