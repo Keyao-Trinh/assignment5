@@ -3,8 +3,7 @@ import { Button } from "@/components";
 import { useUserContext } from "@/hooks";
 
 export const SettingsView = () => {
-  const { userName, setUserName } = useUserContext();
-  const [value, setValue] = useState(userName);
+  const { genre, toggleGenre } = useUserContext();
   const [error, setError] = useState("");
 
   return (
@@ -14,25 +13,21 @@ export const SettingsView = () => {
           <h2 className="font-semibold text-lg">Genre Preferences</h2>
         </div>
         <div className="space-y-2">
-          {/* <input
-            className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+           <input
+            className="rotate-180"         genra={genra} 
             onChange={(event) => {
-              setValue(event.target.value);
-              setError("");
+((genra: string) => genra.has(genra.id), toggleGenra)]} 
+            type="checkbox" />
+              
             }}
-            placeholder="Enter your name"
-            type="text"
-            value={value}
           />
-          {error && <p className="text-red-400 text-sm">{error}</p>} */}
+          {/* {error && <p className="text-red-400 text-sm">{error}</p>}  */}
+
         </div>
-        <div className="flex justify-end gap-2"/>
-{/* <div>
-<input type="checkbox" onClick={}>
-thing
-</input>
-</div> */}
+        <p className="text-gray-400 text-sm">Movies</p>
 {/* onClick should turn off and on values for gernre vaule so it should send values over and those values should be used. THINK ABOUT THAT */}
+     
+     
       </div>
     </section>
   );

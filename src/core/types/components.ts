@@ -12,6 +12,11 @@ export type ImageGridProps = {
   media?: Media;
 };
 
+export type Genre = {
+  label: string;
+  id: number;
+};
+
 export type ImageCell = {
   id: number;
   imageUrl: string;

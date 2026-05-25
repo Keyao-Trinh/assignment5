@@ -3,7 +3,7 @@ import { ImageGrid, ImageOverlay } from "@/components";
 import { favouriteAction, type ImageCell } from "@/core";
 import { useUserContext } from "@/hooks";
 
-export const FavoritesView = () => {
+export const FavouriteView = () => {
   const navigate = useNavigate();
   const { favourites, toggleFavourite } = useUserContext();
 
