@@ -10,13 +10,14 @@ export const PopularView = () => {
   const [page, setPage] = useState<number>(1);
   const { favourites, toggleFavourite } = useUserContext();
   const { cart, toggleCart } = useUserContext();
-
   const navigate = useNavigate();
   const { data } = useTmdb<MediaResponse>(POPULAR_ENDPOINT, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
+    cost: 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99,
     id: result.id,
     imageUrl: getImageUrl(result.poster_path),
+    // media: "movie",
     primaryText: result.original_title,
     secondaryText: `${
       (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99

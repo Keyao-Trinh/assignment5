@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import type { ImageCell, ImageGridProps } from "@/core";
+import { useState } from "react";
+import type { ImageGridProps } from "@/core";
 
 export const ImageList = ({ images, onClick, children }: ImageGridProps) => {
   return (
@@ -23,7 +23,10 @@ export const ImageList = ({ images, onClick, children }: ImageGridProps) => {
                 </p>
               )}
               {image.secondaryText && (
-                <p className="row-span-full mx-10 flex self-center truncate text-center font-semibold text-sm">{image.secondaryText}</p>
+                <>
+                  <p className="row-span-full mx-10 flex self-center truncate text-center font-semibold text-sm">{image.secondaryText}</p>
+                  <Help text={image.secondaryText} />
+                </>
               )}
             </div>
           )}
@@ -31,9 +34,27 @@ export const ImageList = ({ images, onClick, children }: ImageGridProps) => {
         </div>
 
         // <div>
-        //   {image.secondaryText}.slice(0,-2);
+        //   Number{image.secondaryText}.slice(0,-2);
         // </div>
+        // `${image.secondaryText.reduce((acc, current) => acc + current, 0)}
       ))}
+
+      <div>
+        {/* Number{image.secondaryText}.slice(0,-2); */}
+
+        {/* const List =images.filter(money); */}
+
+        {/* .filter() */}
+        {/* <script>
+const numbers = [15, 1, 1, 1];
+
+document.getElementById("demo").innerHTML = numbers.reduce(getSum, 0);
+
+function getSum(total, num) {
+  return total + Math.round(num);
+}
+</script> */}
+      </div>
     </div>
 
     // </div>
@@ -41,3 +62,9 @@ export const ImageList = ({ images, onClick, children }: ImageGridProps) => {
 };
 //col-span-10
 // image
+
+export const Help = (text: any) => {
+  const [total, setTotal] = useState(0);
+  setTotal(total + Number(text.slice(0, -1)));
+  return <div>total.toString</div>;
+};

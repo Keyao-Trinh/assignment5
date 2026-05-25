@@ -8,7 +8,8 @@ export type ImageGridProps = {
   images: ImageCell[];
   onClick?: (image: ImageCell) => void;
   children?: (image: ImageCell) => ReactNode;
-  cost?: string;
+  cost?: number;
+  media?: Media;
 };
 
 export type ImageCell = {
@@ -36,6 +37,8 @@ export type GridData = {
   imagePath: string | null;
   primaryText?: string;
   secondaryText?: string;
+  media?: Media;
+  cost?: number;
 };
 
 export type MediaResponse = {

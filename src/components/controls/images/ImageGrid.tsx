@@ -1,11 +1,4 @@
-import type { ReactNode } from "react";
-import type { ImageCell } from "@/core";
-
-type ImageGridProps = {
-  images: ImageCell[];
-  onClick?: (image: ImageCell) => void;
-  children?: (image: ImageCell) => ReactNode;
-};
+import type { ImageGridProps } from "@/core";
 
 export const ImageGrid = ({ images, onClick, children }: ImageGridProps) => {
   return (
