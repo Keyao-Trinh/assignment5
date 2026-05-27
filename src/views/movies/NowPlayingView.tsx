@@ -9,7 +9,6 @@ import { useTmdb, useUserContext } from "@/hooks";
 export const NowPlayingView = () => {
   const { favourites, toggleFavourite } = useUserContext();
   const { cart, toggleCart } = useUserContext();
-
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const { data } = useTmdb<MediaResponse>(NOW_PLAYING_ENDPOINT, { page });

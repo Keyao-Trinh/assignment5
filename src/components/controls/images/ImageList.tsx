@@ -1,7 +1,10 @@
 import { useState } from "react";
-import type { ImageGridProps } from "@/core";
+import type { ImageCell, ImageGridProps } from "@/core";
 
 export const ImageList = ({ images, onClick, children }: ImageGridProps) => {
+  const [total, setTotal] = useState(0);
+  setTotal(total + Number(text.slice(0, -1)));
+
   return (
     // <div className="">
 
@@ -63,8 +66,8 @@ function getSum(total, num) {
 //col-span-10
 // image
 
-export const Help = (text: any) => {
-  const [total, setTotal] = useState(0);
-  setTotal(total + Number(text.slice(0, -1)));
-  return <div>total.toString</div>;
-};
+// export const Help = (text: string) => {
+// const [total, setTotal] = useState(0);
+// setTotal(total + Number(text.slice(0, -1)));
+// return <p>total.toString</p>
+// };

@@ -13,7 +13,7 @@ export type ImageGridProps = {
 };
 
 export type Genre = {
-  label: string;
+  label: Genre;
   id: number;
 };
 

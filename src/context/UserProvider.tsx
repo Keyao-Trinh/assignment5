@@ -22,12 +22,12 @@ type UserProviderProps = {
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [userName, setUserName] = useLocalStorage<string, string>(USERNAME_KEY, "User");
 
-  const [genre, setGenre] = useLocalStorage<string[], string[]>(GENRE_KEY, ["28", "12", "16", "80", "14", "10751", "27", "9648", "878"]);
+  // const [genre, setGenre] = useLocalStorage<string[], string[]>(GENRE_KEY, ["28", "12", "16", "80", "14", "10751", "27", "9648", "878"]);
 
-  // const [genre, setGenre] = useLocalStorage<Map<number, string>, [number, string][]>(GENRE_KEY, new Map(), {
-  //   deserialize: (entries) => new Map(entries),
-  //   serialize: (map) => Array.from(map.entries()),
-  // });
+  const [preferences, setPreferences] = useLocalStorage<Map<number, Genre>, [number, Genre][]>(GENRE_KEY, new Map(), {
+    deserialize: (entries) => new Map(entries),
+    serialize: (map) => Array.from(map.entries()),
+  });
 
   const [favourites, setFavourites] = useLocalStorage<Map<number, ImageCell>, [number, ImageCell][]>(FAVOURITES_KEY, new Map(), {
     deserialize: (entries) => new Map(entries),
@@ -52,19 +52,19 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     });
   };
 
-  // const toggleGenre = (genre: Genre) => {
-  //   setGenre((prev) => {
-  //     const cloned = new Map(prev);
+  const togglePreferences = (genre: Genre) => {
+    setPreferences((prev) => {
+      const cloned = new Map(prev);
 
-  //     if (cloned.has(genre.id)) {
-  //       cloned.delete(genre.id);
-  //     } else {
-  //       cloned.set(genre.id, genre.label);
-  //     }
+      if (cloned.has(genre.id)) {
+        cloned.delete(genre.id);
+      } else {
+        cloned.set(genre.id, genre);
+      }
 
-  //     return cloned;
-  //   });
-  // };
+      return cloned;
+    });
+  };
 
   const toggleCart = (image: ImageCell) => {
     setCart((prev) => {
@@ -85,11 +85,11 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       value={{
         cart,
         favourites,
-        genre,
-        setGenre,
+        preferences,
         setUserName,
         toggleCart,
         toggleFavourite,
+        togglePreferences,
         userName,
       }}
     >

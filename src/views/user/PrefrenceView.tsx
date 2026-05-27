@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Button } from "@/components";
+
 import { useUserContext } from "@/hooks";
 
 export const SettingsView = () => {
-  const { genre, setGenre } = useUserContext();
-  const [value, setValue] = useState([genre]);
-  const [error, setError] = useState("");
+  const { preferences, togglePreferences } = useUserContext();
+  const [_value, _setValue] = useState();
+  const [_error, _setError] = useState("");
 
   return (
     <section className="mx-auto max-w-7xl space-y-5 p-5">
@@ -17,9 +17,9 @@ export const SettingsView = () => {
           <p>adventure</p>
           <input
             className="rotate-180"
-            onChange={(valueToRemove) => {
-              // Returns a new array with all items EXCEPT the one matching valueToRemove
-              setValue((prevValue) => prevValue.filter((value) => value !== valueToRemove.target.value));
+            onChange={() => {
+              preferences.has(28);
+              togglePreferences;
             }}
             type="checkbox"
           />
