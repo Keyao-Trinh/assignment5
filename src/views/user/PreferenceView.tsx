@@ -1,9 +1,9 @@
 import { useState } from "react";
-
+import type { Genre } from "@/core";
 import { useUserContext } from "@/hooks";
 
-export const SettingsView = () => {
-  const { preferences, togglePreferences } = useUserContext();
+export const PreferenceView = () => {
+  const { togglePreferences } = useUserContext();
   const [_value, _setValue] = useState();
   const [_error, _setError] = useState("");
 
@@ -14,19 +14,19 @@ export const SettingsView = () => {
           <h2 className="font-semibold text-lg">Genre Preferences</h2>
         </div>
         <div className="space-y-2">
-          <p>adventure</p>
+          <p className="text-gray-400 text-sm">Movies</p>
+
+          <label>adventure</label>
           <input
             className="rotate-180"
             onChange={() => {
-              preferences.has(28);
-              togglePreferences;
+              (preferences: Genre) => (preferences.id === 28 ? togglePreferences : console.log(...preferences));
             }}
             type="checkbox"
           />
 
           {/* {error && <p className="text-red-400 text-sm">{error}</p>}  */}
         </div>
-        <p className="text-gray-400 text-sm">Movies</p>
         {/* onClick should turn off and on values for gernre vaule so it should send values over and those values should be used. THINK ABOUT THAT */}
       </div>
     </section>

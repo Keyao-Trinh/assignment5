@@ -13,8 +13,9 @@ export type ImageGridProps = {
 };
 
 export type Genre = {
-  label: Genre;
+  label: string;
   id: number;
+  active: boolean;
 };
 
 export type ImageCell = {

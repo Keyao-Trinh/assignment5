@@ -1,9 +1,9 @@
 import { useState } from "react";
-import type { ImageCell, ImageGridProps } from "@/core";
+import type { ImageGridProps } from "@/core";
 
 export const ImageList = ({ images, onClick, children }: ImageGridProps) => {
   const [total, setTotal] = useState(0);
-  setTotal(total + Number(text.slice(0, -1)));
+  images.filter((image) => setTotal(total + Number(image.secondaryText?.slice(0, -1))));
 
   return (
     // <div className="">
@@ -26,13 +26,11 @@ export const ImageList = ({ images, onClick, children }: ImageGridProps) => {
                 </p>
               )}
               {image.secondaryText && (
-                <>
-                  <p className="row-span-full mx-10 flex self-center truncate text-center font-semibold text-sm">{image.secondaryText}</p>
-                  <Help text={image.secondaryText} />
-                </>
+                <p className="row-span-full mx-10 flex self-center truncate text-center font-semibold text-sm">{image.secondaryText}</p>
               )}
             </div>
           )}
+
           {/* </div> */}
         </div>
 
@@ -42,6 +40,7 @@ export const ImageList = ({ images, onClick, children }: ImageGridProps) => {
         // `${image.secondaryText.reduce((acc, current) => acc + current, 0)}
       ))}
 
+      <p>{total}</p>
       <div>
         {/* Number{image.secondaryText}.slice(0,-2); */}
 

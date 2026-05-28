@@ -27,4 +27,5 @@ export * from "@/views/tv/TvCreditsView";
 export * from "@/views/tv/TvReviewsView";
 export * from "@/views/user/CartView";
 export * from "@/views/user/FavouriteView";
-export * from "@/views/user/SettingView";
+export * from "@/views/user/PreferenceView";
+export * from "@/views/user/SettingsView";

@@ -25,4 +25,4 @@ export const PERSON_ENDPOINT = "https://api.themoviedb.org/3/person/{person_id}/
 export const USERNAME_KEY = "userName";
 export const FAVOURITES_KEY = "favourites";
 export const CART_KEY = "cart";
-export const GENRE_KEY = "genre";
+export const GENRE_KEY = "preferences";

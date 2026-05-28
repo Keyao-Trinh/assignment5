@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import {
   AiringView,
   CareerView,
+  CartView,
   CreditsView,
   EpisodeView,
   ErrorView,
@@ -17,6 +18,7 @@ import {
   PopularView,
   ReviewsView,
   SeasonsView,
+  SettingsView,
   TelevisionView,
   TopRatedView,
   TopTvView,
@@ -47,7 +49,12 @@ export const App = () => {
         <Route element={<TrailerView />} path="trailers" />
         <Route element={<ReviewsView />} path="reviews" />
       </Route>
-      <Route element={<FavouriteView />} path="/favourite" />
+      <Route element={<MainLayout />} path="/">
+        <Route element={<FavouriteView />} path="favourite" />
+        <Route element={<SettingsView />} path="settings" />
+        <Route element={<CartView />} path="cart" />
+      </Route>
+
       <Route element={<MainLayout />} path="/person">
         <Route element={<PersonView />} path=":id">
           <Route element={<ImagesView />} path="images" />

@@ -5,8 +5,8 @@ export type UserContextType = {
   userName: string;
   favourites: Map<number, ImageCell>;
   cart: Map<number, ImageCell>;
-  preferences: Map<number, Genre>;
-  togglePreferences: (genre: Genre) => void;
+  preferences: Array<Genre>;
+  togglePreferences: (preferences: Genre) => void;
   toggleCart: (image: ImageCell) => void;
   setUserName: (userName: string) => void;
   toggleFavourite: (image: ImageCell) => void;
