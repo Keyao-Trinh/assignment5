@@ -50,7 +50,7 @@ export const App = () => {
         <Route element={<ReviewsView />} path="reviews" />
       </Route>
       <Route element={<MainLayout />} path="/">
-        <Route element={<FavouriteView />} path="favourite" />
+        <Route element={<FavouriteView />} path="favourites" />
         <Route element={<SettingsView />} path="settings" />
         <Route element={<CartView />} path="cart" />
       </Route>

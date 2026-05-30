@@ -21,7 +21,7 @@ export const PopularView = () => {
     primaryText: result.original_title,
     secondaryText: `${
       (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99
-    } $ `,
+    }$ `,
   }));
 
   if (!data) {

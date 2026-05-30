@@ -16,11 +16,20 @@ export const PreferenceView = () => {
         <div className="space-y-2">
           <p className="text-gray-400 text-sm">Movies</p>
 
-          <label>adventure</label>
+          <label>Action</label>
           <input
             className="rotate-180"
             onChange={() => {
-              (preferences: Genre) => (preferences.id === 28 ? togglePreferences : console.log(...preferences));
+              (preferences: Genre) => (preferences.id === 28 ? togglePreferences : console.log(preferences));
+            }}
+            type="checkbox"
+          />
+
+          <label>Adventure</label>
+          <input
+            className="rotate-180"
+            onChange={() => {
+              (preferences: Genre) => (preferences.id === 12 ? togglePreferences : console.log(preferences));
             }}
             type="checkbox"
           />

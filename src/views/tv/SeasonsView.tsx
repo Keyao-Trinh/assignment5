@@ -19,7 +19,7 @@ export const SeasonsView = () => {
     primaryText: `season ${result.season_number}`,
     secondaryText: `${
       (19.99 - (YEAR - Number(result.last_air_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.last_air_date.slice(0, 4))) : 4.99
-    } $ `,
+    }$ `,
   }));
 
   if (!data) {
