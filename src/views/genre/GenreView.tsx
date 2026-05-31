@@ -7,13 +7,21 @@ import { ImageGrid, Pagination } from "@/components";
 import { getImageUrl } from "@/core";
 import type { MediaResponse } from "@/core//types/components";
 import { MOVIE_GENRA_ENDPOINT } from "@/core/constants/endpoints";
-import { useTmdb } from "@/hooks";
+import { useTmdb, useUserContext } from "@/hooks";
 
 export const GenreView = () => {
   const [page, setPage] = useState<number>(1);
   const navigate = useNavigate();
-  const [genre, _setGenre] = useState<string>("28");
-  const { data } = useTmdb<MediaResponse>(`${MOVIE_GENRA_ENDPOINT}/&with_genres/${genre}`, { page });
+  const { preferences, togglePreferences } = useUserContext();
+
+  const genreFromMap = Array.from(preferences.values()).map(preferences => preferences.id);
+
+  let genre = (genreFromMap).toString();
+  
+  
+  
+  console.log({genre});
+  const { data } = useTmdb<MediaResponse>(`${MOVIE_GENRA_ENDPOINT}&with_genres=${genre}`, { page });
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
@@ -96,7 +104,7 @@ export const GenreView = () => {
             ]}
           />
           or change vaule to to and make it a LinkGroup ??? */}
-      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}`)} />
+      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

@@ -18,6 +18,7 @@ export const Header = () => {
         <Link to="/tv/catagory/airing_today">TV</Link>
         <Link to="/trending/movies">Trending</Link>
         <Link to="/genre/movies/adventure">Genre</Link>
+        {/* <Searchbar/> */}
 
         <div className="absolute top-3 right-5">
           <div className="items-centre flex">
