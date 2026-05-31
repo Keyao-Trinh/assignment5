@@ -1,32 +1,42 @@
 // with_genre a string
 // get ids?
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ImageGrid, Pagination } from "@/components";
-import { getImageUrl } from "@/core";
-import type { MediaResponse } from "@/core//types/components";
+import { ButtonGroup, ImageGrid, ImageOverlay, Link, LinkGroup, Pagination } from "@/components";
+import { cartAction, favouriteAction, getImageUrl, YEAR } from "@/core";
+import type { ImageCell, MediaResponse } from "@/core//types/components";
 import { MOVIE_GENRA_ENDPOINT } from "@/core/constants/endpoints";
 import { useTmdb, useUserContext } from "@/hooks";
 
 export const GenreView = () => {
   const [page, setPage] = useState<number>(1);
+  const [genre, setGenre] = useState();
+  const { favourites, toggleFavourite } = useUserContext();
+  const { cart, toggleCart } = useUserContext();
   const navigate = useNavigate();
   const { preferences, togglePreferences } = useUserContext();
+  // let [genre] = useState("28");
 
-  const genreFromMap = Array.from(preferences.values()).map(preferences => preferences.id);
+  useEffect(() => {
+    const genreFromMap = Array.from(preferences.values()).map((preferences) => preferences.id);
+    setGenre(genreFromMap[0].toString());
+    console.log({ genre });
+    //  const pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
+  }, [togglePreferences, preferences]);
 
-  let genre = (genreFromMap).toString();
-  
-  
-  
-  console.log({genre});
-  const { data } = useTmdb<MediaResponse>(`${MOVIE_GENRA_ENDPOINT}&with_genres=${genre}`, { page });
+  const { data } = useTmdb<MediaResponse>(`${MOVIE_GENRA_ENDPOINT}?api_key=${import.meta.env.VITE_TMDB_API_KEY}&with_genres=${genre}`, {
+    genre,
+    page,
+  });
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
     imageUrl: getImageUrl(result.poster_path),
     primaryText: result.original_title,
+    secondaryText: `${
+      (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99
+    }$ `,
   }));
 
   if (!data) {
@@ -36,6 +46,10 @@ export const GenreView = () => {
   return (
     <section className="mx-auto max-w-[1200px] space-y-5 p-5">
       <h1 className="mb-4 font-bold text-3xl">Genre</h1>
+      <div>
+        <Link to="/genre/movies/adventure">Movies</Link>
+        <Link to="/genre/tv/action">TV</Link>
+      </div>
 
       {/* <LinkGroup
             options={[
@@ -52,9 +66,14 @@ export const GenreView = () => {
             ]}
           /> */}
 
-      {/* <ButtonGroup
+      <ButtonGroup
         onClick={(value: string) => {
-          setGenre({ value });
+          const genres = { value };
+          const genreFromMap = Array.from(preferences.values()).map((preferences) => preferences.id);
+          setGenre(genreFromMap[0].toString());
+          const pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
+          setGenre(value);
+          console.log(`${value} and ${genre}`);
         }}
         options={[
           { label: "Action", value: "28" },
@@ -69,7 +88,7 @@ export const GenreView = () => {
           { label: "Sci-Fi", value: "878" },
         ]}
         value={genre}
-      /> */}
+      />
 
       {/* <ButtonGroup
         value={genrenumber}
@@ -104,8 +123,19 @@ export const GenreView = () => {
             ]}
           />
           or change vaule to to and make it a LinkGroup ??? */}
-      <ImageGrid images={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
+      <ImageGrid images={gridData} onClick={(image) => navigate(`/movie/${image.id}/reviews`)}>
+        {(image) => (
+          <>
+            <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
+            <ImageOverlay actions={[cartAction((image: ImageCell) => cart.has(image.id), toggleCart)]} image={image} />
+          </>
+        )}
+      </ImageGrid>
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );
 };
+
+// https://api.themoviedb.org/3/trending/movie/day?api_key=d4a69b085f65968c22bb19630ebd69cb&page=1&time_window=day
+
+// https: //api.themoviedb.org/3/discover/movie&with_genres=28,12,16,80,10751,14,36,27,9648,878?api_key=d4a69b085f65968c22bb19630ebd69cb&page=1

@@ -37,6 +37,18 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     { active: true, id: 878, label: "Sci-Fi" },
   ]);
 
+  const [preferencestv, setPreferencestv] = useLocalStorage<Genre[]>(GENRE_KEY, [
+    { active: true, id: 10759, label: "Action" },
+    { active: true, id: 35, label: "Comedy" },
+    { active: true, id: 16, label: "Animation" },
+    { active: true, id: 80, label: "Crime" },
+    { active: true, id: 10751, label: "Family" },
+    { active: true, id: 99, label: "Documentary" },
+    { active: true, id: 18, label: "Drama" },
+    { active: true, id: 10762, label: "Kids" },
+    { active: true, id: 9648, label: "Mystery" },
+    { active: true, id: 878, label: "Sci-Fi" },
+  ]);
   const [favourites, setFavourites] = useLocalStorage<Map<number, ImageCell>, [number, ImageCell][]>(FAVOURITES_KEY, new Map(), {
     deserialize: (entries) => new Map(entries),
     serialize: (map) => Array.from(map.entries()),
@@ -47,6 +59,20 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   });
 
   const togglePreferences = (preferences: Genre) => {
+    setPreferences((prev) => {
+      const cloned = [...prev];
+
+      if (preferences.active === true) {
+        preferences.active = false;
+      } else {
+        preferences.active = true;
+      }
+
+      return cloned;
+    });
+  };
+
+  const togglePreferencestv = (preferences: Genre) => {
     setPreferences((prev) => {
       const cloned = [...prev];
 
@@ -94,10 +120,12 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         cart,
         favourites,
         preferences,
+        preferencestv,
         setUserName,
         toggleCart,
         toggleFavourite,
         togglePreferences,
+        togglePreferencestv,
         userName,
       }}
     >

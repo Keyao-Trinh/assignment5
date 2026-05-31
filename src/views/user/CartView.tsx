@@ -9,17 +9,17 @@ export const CartView = () => {
   const [total, setTotal] = useState(0);
   const { cart, toggleCart } = useUserContext();
 
-useEffect(() => {
-const namesFromMap = Array.from(cart.values()).map(cart => cart.secondaryText);
+  useEffect(() => {
+    const namesFromMap = Array.from(cart.values()).map((cart) => cart.secondaryText);
     // console.log({...namesFromMap});
-const nameFromMap = namesFromMap.map(x => Number(x?.slice(0,-2)));
+    const nameFromMap = namesFromMap.map((x) => Number(x?.slice(0, -2)));
     // console.log({...nameFromMap});
-  let sum=0;
-  for (let i = 0; i < nameFromMap.length; i++) {
-    setTotal(sum += nameFromMap[i]);
-}
-    console.log({total});
-}, [cart, toggleCart] );
+    const sum = 0;
+    for (let i = 0; i < nameFromMap.length; i++) {
+      setTotal(sum + Number(nameFromMap[i]));
+    }
+    console.log({ total });
+  }, [cart, total]);
 
   return (
     <section className="mx-auto max-w-7xl space-y-5 p-5">
@@ -28,13 +28,13 @@ const nameFromMap = namesFromMap.map(x => Number(x?.slice(0,-2)));
         <p className="mt-10 text-gray-400">You have no carted things yet.</p>
       ) : (
         <>
-        <ImageList images={Array.from(cart.values())} onClick={(image) => navigate(`/movie/${image.id}/credits`)}>
-          {(image) => <ImageOverlay actions={[cartAction((image: ImageCell) => cart.has(image.id), toggleCart)]} image={image} />}
-        </ImageList>
-        <div>
-        <p>Total: {total}$</p>
-      </div>
-      </>
+          <ImageList images={Array.from(cart.values())} onClick={(image) => navigate(`/movie/${image.id}/credits`)}>
+            {(image) => <ImageOverlay actions={[cartAction((image: ImageCell) => cart.has(image.id), toggleCart)]} image={image} />}
+          </ImageList>
+          <div>
+            <p>Total: {total}$</p>
+          </div>
+        </>
       )}
     </section>
   );
