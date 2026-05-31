@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ButtonGroup, ImageGrid, ImageOverlay, Link, LinkGroup, Pagination } from "@/components";
+import { ButtonGroup, ImageGrid, ImageOverlay, Link, Pagination } from "@/components";
 import { cartAction, favouriteAction, getImageUrl, YEAR } from "@/core";
 import type { ImageCell, MediaResponse } from "@/core//types/components";
 import { MOVIE_GENRA_ENDPOINT } from "@/core/constants/endpoints";
@@ -23,7 +23,7 @@ export const GenreView = () => {
     setGenre(genreFromMap[0].toString());
     console.log({ genre });
     //  const pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
-  }, [togglePreferences, preferences]);
+  }, [preferences, genre]);
 
   const { data } = useTmdb<MediaResponse>(`${MOVIE_GENRA_ENDPOINT}?api_key=${import.meta.env.VITE_TMDB_API_KEY}&with_genres=${genre}`, {
     genre,
@@ -68,10 +68,10 @@ export const GenreView = () => {
 
       <ButtonGroup
         onClick={(value: string) => {
-          const genres = { value };
+          const _genres = { value };
           const genreFromMap = Array.from(preferences.values()).map((preferences) => preferences.id);
           setGenre(genreFromMap[0].toString());
-          const pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
+          const _pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
           setGenre(value);
           console.log(`${value} and ${genre}`);
         }}

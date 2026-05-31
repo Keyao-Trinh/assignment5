@@ -24,7 +24,7 @@ export const TvGenreView = () => {
     setGenre(genreFromMap[0].toString());
     console.log({ genre });
     //  const pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
-  }, [togglePreferencestv, preferencestv]);
+  }, [preferencestv, genre]);
 
   const { data } = useTmdb<MediaResponse>(`${TV_GENRA_ENDPOINT}?api_key=${import.meta.env.VITE_TMDB_API_KEY}&with_genres=${genre}`, {
     genre,
@@ -105,10 +105,10 @@ export const TvGenreView = () => {
       /> */}
       <ButtonGroup
         onClick={(value: string) => {
-          const genres = { value };
+          const _genres = { value };
           const genreFromMap = Array.from(preferencestv.values()).map((preferencestv) => preferencestv.id);
           setGenre(genreFromMap[0].toString());
-          const pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
+          const _pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
           setGenre(value);
           console.log(`${value} and ${genre}`);
         }}

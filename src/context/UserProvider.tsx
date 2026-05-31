@@ -37,7 +37,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     { active: true, id: 878, label: "Sci-Fi" },
   ]);
 
-  const [preferencestv, setPreferencestv] = useLocalStorage<Genre[]>(GENRE_KEY, [
+  const [preferencestv, _setPreferencestv] = useLocalStorage<Genre[]>(GENRE_KEY, [
     { active: true, id: 10759, label: "Action" },
     { active: true, id: 35, label: "Comedy" },
     { active: true, id: 16, label: "Animation" },
