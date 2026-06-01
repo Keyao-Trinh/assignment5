@@ -14,16 +14,14 @@ import { useTmdb, useUserContext } from "@/hooks";
 export const TvGenreView = () => {
   const [page, setPage] = useState<number>(1);
   const [genre, setGenre] = useState("10759");
-  //  const { favourites, toggleFavourite } = useUserContext();
-  //  const { cart, toggleCart } = useUserContext();
   const navigate = useNavigate();
   const { preferencestv, togglePreferencestv } = useUserContext();
 
-  const genreFromMap = Array.from(preferencestv.values()).map((preferencestv) => preferencestv.id);
+  // const _genreFromMap = Array.from(preferencestv.values()).map((preferencestv) => preferencestv.id);
   // setGenre(genreFromMap[0].toString());
 
   useEffect(() => {
-    const genreFromMap = Array.from(preferencestv.values()).map((preferencestv) => preferencestv.id);
+    const _genreFromMap = Array.from(preferencestv.values()).map((preferencestv) => preferencestv.id);
     // setGenre(genreFromMap[0].toString());
     console.log({ genre });
     //  const pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
@@ -111,7 +109,7 @@ export const TvGenreView = () => {
           const _genres = { value };
           const genreFromMap = Array.from(preferencestv.values()).map((preferencestv) => preferencestv.id);
           setGenre(genreFromMap[0].toString());
-          const _pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
+          // const _pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
           setGenre(value);
           console.log(`${value} and ${genre}`);
         }}

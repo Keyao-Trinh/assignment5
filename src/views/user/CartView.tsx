@@ -33,6 +33,8 @@ export const CartView = () => {
           </ImageList>
           <div>
             <p>Total: {total}$</p>
+            <p>tax: {total * 0.13}$</p>
+            <p>Total: {total * 0.13 + total}$</p>
           </div>
         </>
       )}

@@ -19,7 +19,7 @@ export const GenreView = () => {
   // let [genre] = useState("28");
 
   useEffect(() => {
-    const genreFromMap = Array.from(preferences.values()).map((preferences) => preferences.id);
+    const _genreFromMap = Array.from(preferences.values()).map((preferences) => preferences.id);
     // setGenre(genreFromMap[0].toString());
     console.log({ genre });
     // const target = Array.from(preferences.values()).find((preferences) => (preferences.id = Number(genre)));
@@ -72,10 +72,10 @@ export const GenreView = () => {
       <ButtonGroup
         onClick={(value: string) => {
           const _genres = { value };
-          const genreFromMap = Array.from(preferences.values()).map((preferences) => preferences.id);
+          const _genreFromMap = Array.from(preferences.values()).map((preferences) => preferences.id);
           // setGenre(genreFromMap[0].toString());
           // const _pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
-          const nameFromMap = Array.from(preferences.values()).map((preferences) => preferences.label);
+          const _nameFromMap = Array.from(preferences.values()).map((preferences) => preferences.label);
           // const target = preferences.get("${preferences.id}");
           setGenre(value);
         }}
