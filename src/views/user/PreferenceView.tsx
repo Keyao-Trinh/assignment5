@@ -16,9 +16,9 @@ export const PreferenceView = () => {
         <div className="space-y-2">
           <p className="text-gray-400 text-sm">Movies</p>
 
-          <label>Action </label>
+          <label className="pl-2">Action </label>
           <input
-            className="rotate-180"
+            className="pr-8"
             onClick={() => {
               (preferences: Genre) => (preferences.id === 28 ? togglePreferences : console.log(preferences));
               console.log(...preferences);
@@ -26,21 +26,91 @@ export const PreferenceView = () => {
             type="checkbox"
           />
 
-          <label>Adventure </label>
+          <label className="pl-2">Adventure </label>
           <input
-            className="rotate-180"
+            className="p-8"
             // defaultChecked={true}
             onClick={() => {
               (preferences: Genre) => (preferences.id === 12 ? togglePreferences : console.log(preferences));
             }}
             type="checkbox"
           />
-          <label>Animation </label>
+          <label className="pl-2">Animation </label>
           <input
-            className="rotate-180"
+            className="p-8"
             // defaultChecked={true}
             onClick={() => {
               (preferences: Genre) => (preferences.id === 16 ? togglePreferences : console.log(preferences));
+            }}
+            type="checkbox"
+          />
+
+          <label className="pl-2">Crime </label>
+          <input
+            className="p-8"
+            // defaultChecked={true}
+            onClick={() => {
+              (preferences: Genre) => (preferences.id === 80 ? togglePreferences : console.log(preferences));
+            }}
+            type="checkbox"
+          />
+
+          <label className="pl-2">Family </label>
+          <input
+            className="p-8"
+            // defaultChecked={true}
+            onClick={() => {
+              (preferences: Genre) => (preferences.id === 10551 ? togglePreferences : console.log(preferences));
+            }}
+            type="checkbox"
+          />
+
+          <label className="pl-2">Fantasy </label>
+          <input
+            className="p-8"
+            // defaultChecked={true}
+            onClick={() => {
+              (preferences: Genre) => (preferences.id === 14 ? togglePreferences : console.log(preferences));
+            }}
+            type="checkbox"
+          />
+
+          <label className="pl-2">History </label>
+          <input
+            className="p-8"
+            // defaultChecked={true}
+            onClick={() => {
+              (preferences: Genre) => (preferences.id === 36 ? togglePreferences : console.log(preferences));
+            }}
+            type="checkbox"
+          />
+
+          <label className="pl-2">Horror </label>
+          <input
+            className="p-8"
+            // defaultChecked={true}
+            onClick={() => {
+              (preferences: Genre) => (preferences.id === 27 ? togglePreferences : console.log(preferences));
+            }}
+            type="checkbox"
+          />
+
+          <label className="pl-2">Mystery </label>
+          <input
+            className="p-8"
+            // defaultChecked={true}
+            onClick={() => {
+              (preferences: Genre) => (preferences.id === 9648 ? togglePreferences : console.log(preferences));
+            }}
+            type="checkbox"
+          />
+
+          <label className="pl-2">Sci-fi </label>
+          <input
+            className="p-8"
+            // defaultChecked={true}
+            onClick={() => {
+              (preferences: Genre) => (preferences.id === 878 ? togglePreferences : console.log(preferences));
             }}
             type="checkbox"
           />

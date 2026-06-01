@@ -25,16 +25,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   // const [genre, setGenre] = useLocalStorage<string[], string[]>(GENRE_KEY, ["28", "12", "16", "80", "14", "10751", "27", "9648", "878"]);
 
   const [preferences, setPreferences] = useLocalStorage<Genre[]>(GENRE_KEY, [
-    { active: true, id: 28, label: "Action" },
-    { active: true, id: 12, label: "Adventure" },
-    { active: true, id: 16, label: "Animation" },
-    { active: true, id: 80, label: "Crime" },
-    { active: true, id: 10751, label: "Family" },
-    { active: true, id: 14, label: "Fantasy" },
-    { active: true, id: 36, label: "History" },
-    { active: true, id: 27, label: "Horror" },
-    { active: true, id: 9648, label: "Mystery" },
-    { active: true, id: 878, label: "Sci-Fi" },
+    { active: true, id: 28, label: "action" },
+    { active: true, id: 12, label: "adventure" },
+    { active: true, id: 16, label: "animation" },
+    { active: true, id: 80, label: "crime" },
+    { active: true, id: 10751, label: "family" },
+    { active: true, id: 14, label: "fantasy" },
+    { active: true, id: 36, label: "history" },
+    { active: true, id: 27, label: "horror" },
+    { active: true, id: 9648, label: "mystery" },
+    { active: true, id: 878, label: "sci-fi" },
   ]);
 
   const [preferencestv, _setPreferencestv] = useLocalStorage<Genre[]>(GENRE_KEY, [

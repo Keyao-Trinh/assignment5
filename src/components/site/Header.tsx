@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "@/components";
 import { ICON_SIZE } from "@/core";
 import { useUserContext } from "@/hooks";
-import { SearchView } from "@/views/SearchView";
 
 // import { SearchView } from '@/views/SearchView'; search bar
 export const Header = () => {
@@ -18,7 +17,7 @@ export const Header = () => {
         <Link to="/movies/catagory/now_playing">Movies</Link>
         <Link to="/tv/catagory/airing_today">TV</Link>
         <Link to="/trending/movies">Trending</Link>
-        <Link to="/genre/movies/adventure">Genre</Link>
+        <Link to="/genre/movies">Genre</Link>
         <Link to="/search">Search</Link>
         {/* <SearchView /> */}
 

@@ -1,6 +1,6 @@
 // with_genre a string
 // get ids?
- 
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonGroup, ImageGrid, Link, Pagination } from "@/components";
@@ -19,9 +19,12 @@ export const TvGenreView = () => {
   const navigate = useNavigate();
   const { preferencestv, togglePreferencestv } = useUserContext();
 
+  const genreFromMap = Array.from(preferencestv.values()).map((preferencestv) => preferencestv.id);
+  // setGenre(genreFromMap[0].toString());
+
   useEffect(() => {
     const genreFromMap = Array.from(preferencestv.values()).map((preferencestv) => preferencestv.id);
-    setGenre(genreFromMap[0].toString());
+    // setGenre(genreFromMap[0].toString());
     console.log({ genre });
     //  const pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
   }, [preferencestv, genre]);
@@ -47,8 +50,8 @@ export const TvGenreView = () => {
       <h1 className="mb-4 font-bold text-3xl">Genre</h1>
 
       <div>
-        <Link to="/genre/movies/adventure">Movies</Link>
-        <Link to="/genre/tv/action">TV</Link>
+        <Link to="/genre/movies">Movies</Link>
+        <Link to="/genre/tv">TV</Link>
       </div>
 
       {/* <ButtonGroup

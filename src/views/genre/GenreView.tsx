@@ -11,7 +11,7 @@ import { useTmdb, useUserContext } from "@/hooks";
 
 export const GenreView = () => {
   const [page, setPage] = useState<number>(1);
-  const [genre, setGenre] = useState();
+  const [genre, setGenre] = useState("28");
   const { favourites, toggleFavourite } = useUserContext();
   const { cart, toggleCart } = useUserContext();
   const navigate = useNavigate();
@@ -20,8 +20,11 @@ export const GenreView = () => {
 
   useEffect(() => {
     const genreFromMap = Array.from(preferences.values()).map((preferences) => preferences.id);
-    setGenre(genreFromMap[0].toString());
+    // setGenre(genreFromMap[0].toString());
     console.log({ genre });
+    // const target = Array.from(preferences.values()).find((preferences) => (preferences.id = Number(genre)));
+    // console.log(`${value} and ${genre}`);
+    // navigate(`/genre/movie/${target.label}`);
     //  const pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
   }, [preferences, genre]);
 
@@ -47,8 +50,8 @@ export const GenreView = () => {
     <section className="mx-auto max-w-[1200px] space-y-5 p-5">
       <h1 className="mb-4 font-bold text-3xl">Genre</h1>
       <div>
-        <Link to="/genre/movies/adventure">Movies</Link>
-        <Link to="/genre/tv/action">TV</Link>
+        <Link to="/genre/movies">Movies</Link>
+        <Link to="/genre/tv">TV</Link>
       </div>
 
       {/* <LinkGroup
@@ -70,10 +73,11 @@ export const GenreView = () => {
         onClick={(value: string) => {
           const _genres = { value };
           const genreFromMap = Array.from(preferences.values()).map((preferences) => preferences.id);
-          setGenre(genreFromMap[0].toString());
-          const _pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
+          // setGenre(genreFromMap[0].toString());
+          // const _pick = genreFromMap.filter((genreFromMap) => genreFromMap === Number(value));
+          const nameFromMap = Array.from(preferences.values()).map((preferences) => preferences.label);
+          // const target = preferences.get("${preferences.id}");
           setGenre(value);
-          console.log(`${value} and ${genre}`);
         }}
         options={[
           { label: "Action", value: "28" },

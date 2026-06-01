@@ -80,8 +80,8 @@ export const App = () => {
       </Route>
 
       <Route element={<MainLayout />} path="/genre">
-        <Route element={<GenreView />} path="movies/:genre" />
-        <Route element={<TvGenreView />} path="tv/:genre" />
+        <Route element={<GenreView />} path="movies/" />
+        <Route element={<TvGenreView />} path="tv" />
       </Route>
 
       <Route element={<MainLayout />} path="/trending">

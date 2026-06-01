@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ImageGrid, ImageOverlay, Pagination, SearchBar } from "@/components";
-import { favouriteAction, getImageUrl, type ImageCell, type MediaResponse, RATE_LIMIT_DELAY, SEARCH_ENDPOINT, YEAR } from "@/core";
+import { favouriteAction, getImageUrl, type ImageCell, type MediaResponse, RATE_LIMIT_DELAY, SEARCH_ENDPOINT } from "@/core";
 import { useDebounce, useTmdb, useUserContext } from "@/hooks";
 
 export const SearchView = () => {
