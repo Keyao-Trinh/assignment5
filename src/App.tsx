@@ -17,6 +17,7 @@ import {
   PopularTvView,
   PopularView,
   ReviewsView,
+  SearchView,
   SeasonsView,
   SettingsView,
   TelevisionView,
@@ -52,6 +53,7 @@ export const App = () => {
       <Route element={<MainLayout />} path="/">
         <Route element={<FavouriteView />} path="favourites" />
         <Route element={<SettingsView />} path="settings" />
+        <Route element={<SearchView />} path="search" />
         <Route element={<CartView />} path="cart" />
       </Route>
 

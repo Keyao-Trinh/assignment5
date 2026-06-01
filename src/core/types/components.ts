@@ -82,6 +82,7 @@ export type DetailRepsonse = {
   backdrop_path: string;
   release_date: string;
   last_air_date: number;
+  name?: string;
   videos?: {
     results: Array<{
       key: string;

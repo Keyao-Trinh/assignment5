@@ -32,7 +32,7 @@ export const PopularTvView = () => {
         <Link to="/tv/catagory/airing_today">Airing Today</Link>
       </div>
 
-      <ImageGrid images={gridData} onClick={(id) => navigate(`/tv/${id}/credits`)} />
+      <ImageGrid images={gridData} onClick={(image) => navigate(`/tv/${image.id}/credits`)} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

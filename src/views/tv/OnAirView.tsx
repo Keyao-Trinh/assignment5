@@ -14,7 +14,7 @@ export const OnAirView = () => {
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
     imageUrl: getImageUrl(result.poster_path),
-    primaryText: result.original_name,
+    primaryText: result.name,
   }));
 
   if (!data) {
@@ -32,7 +32,7 @@ export const OnAirView = () => {
         <Link to="/tv/catagory/airing_today">Airing Today</Link>
       </div>
 
-      <ImageGrid images={gridData} onClick={(id) => navigate(`/tv/${id}/credits`)} />
+      <ImageGrid images={gridData} onClick={(image) => navigate(`/tv/${image.id}/credits`)} />
       <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
     </section>
   );

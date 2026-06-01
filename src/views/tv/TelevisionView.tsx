@@ -28,6 +28,7 @@ export const TelevisionView = () => {
           }}
         />
         <div className="mx-auto flex max-w-5xl flex-row flex-col gap-8 px-6 py-10">
+          
           <img
             alt={data.title}
             className="h-[375px] w-[250px] rounded-xl object-cover shadow-lg"

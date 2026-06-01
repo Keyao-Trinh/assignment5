@@ -13,6 +13,7 @@ export * from "@/views/movies/UpComingView";
 export * from "@/views/person/CareerView";
 export * from "@/views/person/ImagesView";
 export * from "@/views/person/PersonView";
+export * from "@/views/SearchView";
 export * from "@/views/site/ErrorView";
 export * from "@/views/site/HomeView";
 export * from "@/views/tv/AiringView";

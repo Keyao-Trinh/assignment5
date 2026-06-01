@@ -1,6 +1,6 @@
 // with_genre a string
 // get ids?
-
+ 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonGroup, ImageGrid, Link, Pagination } from "@/components";

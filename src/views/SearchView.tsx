@@ -1,3 +1,54 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ImageGrid, ImageOverlay, Pagination, SearchBar } from "@/components";
+import { favouriteAction, getImageUrl, type ImageCell, type MediaResponse, RATE_LIMIT_DELAY, SEARCH_ENDPOINT, YEAR } from "@/core";
+import { useDebounce, useTmdb, useUserContext } from "@/hooks";
+
+export const SearchView = () => {
+  const navigate = useNavigate();
+  const { favourites, toggleFavourite } = useUserContext();
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState<number>(1);
+  const debouncedQuery = useDebounce(query, RATE_LIMIT_DELAY);
+  const { data } = useTmdb<MediaResponse>(SEARCH_ENDPOINT, { page, query: debouncedQuery });
+
+  const gridData = (data?.results ?? []).map((result) => ({
+    id: result.id,
+    imageUrl: getImageUrl(result.poster_path),
+    primaryText: result.original_title,
+    // secondaryText: `${
+    //   (19.99 - (YEAR - Number(result.release_date.slice(0, 4)))) > 4.99 ? 19.99 - (YEAR - Number(result.release_date.slice(0, 4))) : 4.99
+    // }$ `,
+  }));
+
+  if (!data) {
+    return <p className="text-center text-gray-400">Loading...</p>;
+  }
+
+  return (
+    <section className="mx-auto w-full max-w-7xl space-y-5 p-5">
+      <h1 className="mb-4 font-bold text-3xl">Search</h1>
+      <SearchBar onChange={setQuery} value={query} />
+      <ImageGrid
+        images={gridData}
+        onClick={(image) => {
+          setPage(1);
+          navigate(`/movie/${image.id}/credits`);
+        }}
+      >
+        {(image) => (
+          <ImageOverlay actions={[favouriteAction((image: ImageCell) => favourites.has(image.id), toggleFavourite)]} image={image} />
+        )}
+      </ImageGrid>
+      {data.results.length ? (
+        <Pagination maxPages={data.total_pages} onClick={setPage} page={page} />
+      ) : (
+        <p className="text-center text-gray-400">No search results found.</p>
+      )}
+    </section>
+  );
+};
+
 // import { useEffect, useState } from "react";
 // import { Button, ImageGrid, Pagination, SearchBar } from "@/components";
 // import { getImageUrl } from "@/core";
